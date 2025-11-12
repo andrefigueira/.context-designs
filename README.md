@@ -8,7 +8,7 @@ Modern, production-ready UI templates that showcase the future of AI-assisted de
 
 ## The Revolution: Claude Code + .context
 
-This repository represents a fundamental shift in how we build user interfaces. Not faster templates. Not better boilerplate. **A completely different way of working.**
+This repository shows how Claude Code and .context documentation work together to change UI development. You define your design system once, then generate components that follow your exact standards every time.
 
 ### What Makes This Different?
 
@@ -27,12 +27,12 @@ Traditional approach:
 
 ### The Claude Code Advantage
 
-[Claude Code](https://claude.com/claude-code) is not just another AI coding assistant. It's Anthropic's official CLI tool that fundamentally understands software development workflows.
+[Claude Code](https://claude.com/claude-code) is Anthropic's official CLI tool that understands software development workflows. It reads your `.context/` documentation and applies your standards automatically.
 
-**Why Claude Code Changes Everything for UI Development:**
+**Why this matters for UI development:**
 
 #### Design System Mastery
-Claude Code reads your `.context/` files and internalizes your entire design language. Every component it generates matches your spacing, colors, typography, and interaction patterns. No more style drift. No more inconsistency. Just perfect adherence to your standards.
+Claude Code reads your `.context/` files and learns your design language. Every component it generates matches your spacing, colors, typography, and interaction patterns. Your components stay consistent because they all follow the same documented standards.
 
 #### From Thought to Production in Minutes
 ```
@@ -48,7 +48,7 @@ Claude Code: [Generates complete, production-ready component in 30 seconds]
 - Comprehensive inline documentation
 ```
 
-No copy-paste. No fighting with CSS. No accessibility afterthoughts. Just done.
+The code works immediately. Everything is accessible, responsive, and follows your design system.
 
 #### Learns Your Codebase
 Point Claude Code at any template in this repo and ask:
@@ -92,9 +92,9 @@ The `.context/` directory contains structured markdown documentation that define
 1. **Human reference** - Your team's single source of truth
 2. **AI context** - Claude Code's understanding of your project
 
-### The Magic: Living Documentation
+### Living Documentation
 
-Traditional documentation dies the moment it's written. The .context methodology keeps it alive:
+Traditional documentation gets out of sync with code within days. The .context methodology keeps documentation and implementation synchronized:
 
 **Before (Traditional Flow):**
 ```
@@ -116,7 +116,7 @@ Claude Code adapts instantly
 Perfect synchronization forever
 ```
 
-Your documentation becomes executable. Your standards become automatic.
+Claude Code treats your documentation as the source of truth for how to build components.
 
 ### Real-World Example from This Repo
 
@@ -129,23 +129,23 @@ Look at `.context/styling/design-system.md`. It defines:
 
 When you ask Claude Code to "create a dashboard stat card", it:
 1. Reads the design system specs
-2. Applies exact color values (not generic blues)
-3. Uses defined spacing scale (not arbitrary padding)
-4. Follows component patterns (consistent structure)
-5. Includes proper ARIA labels (accessibility built-in)
+2. Applies your exact color values
+3. Uses your defined spacing scale
+4. Follows your component patterns
+5. Includes proper ARIA labels
 
-**Result**: Every component looks like it came from the same designer, the same codebase, the same brain. Because it did - yours, augmented by AI.
+Every component follows your design system consistently because Claude Code references the same `.context/` documentation.
 
-### Why This Changes Everything
+### Who Benefits
 
 **For Solo Developers:**
 - Work with the consistency of a large team
 - Maintain design system discipline automatically
-- Never forget your own conventions
+- Keep your conventions consistent across every component
 
 **For Teams:**
-- Onboard new developers instantly (they just talk to Claude Code)
-- Enforce standards without code review overhead
+- Onboard new developers by pointing them to .context documentation
+- Enforce standards automatically through Claude Code
 - Scale design systems across unlimited components
 
 **For Agencies:**
@@ -180,7 +180,7 @@ Within minutes, Claude Code generated:
 - Comprehensive documentation
 - Extracted reusable components
 
-**Zero manual coding. Zero accessibility remediation. Zero responsive breakage. Just works.**
+Claude Code handles the implementation details. The generated code is accessible, responsive, and production-ready.
 
 ### Try It Yourself
 
@@ -293,7 +293,7 @@ You: "Build a blog layout"
 Claude Code: [Consistent with everything else, zero guidance needed]
 ```
 
-**The difference?** Claude Code reads your `.context/` files automatically and applies your standards to everything. No repetition. No drift. Perfect consistency.
+Claude Code reads your `.context/` files automatically and applies your standards to everything. You document your standards once, and every component follows them.
 
 ### Setting Up Your Context
 
@@ -307,8 +307,7 @@ Start with these essential files in `.context/`:
 
 You can use this repository as a template. Copy the `.context/` directory structure and customize it for your project.
 
-**Time investment:** 30-60 minutes to document your standards
-**Time saved:** Hours on every subsequent component, forever
+Document your standards once (30-60 minutes), then generate consistent components for the life of your project.
 
 ### Your First AI-Generated Component
 
@@ -327,9 +326,7 @@ Watch Claude Code:
 - Generate mobile-responsive code
 - Create reusable, production-ready output
 
-**That's it. From idea to implementation in seconds.**
-
-The `.context/` groundwork you laid enables:
+The `.context/` groundwork enables:
 - Shorter, more direct prompts
 - Consistent output across all components
 - Zero need to repeat styling preferences
@@ -459,7 +456,7 @@ Every element serves a purpose with clear visual hierarchy
 Patterns repeat predictably across all templates
 
 ### Accessibility
-WCAG AA compliance is a requirement, not an option
+WCAG AA compliance required for all templates
 
 ### Performance
 Minimal CSS with optimized Tailwind utilities
@@ -605,4 +602,4 @@ This project follows the [.context methodology](https://github.com/andrefigueira
 
 **Made for the web development community**
 
-Start building beautiful interfaces today. No dependencies. No complexity. Just pure Tailwind CSS.
+Start building beautiful interfaces with pure Tailwind CSS and minimal dependencies.
