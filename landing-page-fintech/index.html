@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modern fintech landing page - Manage your finances smarter with our all-in-one platform">
+  <title>FinFlow - Smart Financial Management</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Tailwind configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Styles -->
+  <style>
+    [x-cloak] { display: none !important; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .gradient-text {
+      color: #111827;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-gray-950 antialiased transition-colors duration-300">
+
+  <!-- Navigation -->
+  <nav x-data="{
+         mobileMenuOpen: false,
+         scrolled: false,
+         darkMode: localStorage.getItem('darkMode') === 'true',
+         toggleDark() {
+           this.darkMode = !this.darkMode;
+           localStorage.setItem('darkMode', this.darkMode);
+           document.documentElement.classList.toggle('dark', this.darkMode);
+         }
+       }"
+       x-init="document.documentElement.classList.toggle('dark', darkMode)"
+       @scroll.window="scrolled = window.pageYOffset > 20"
+       :class="scrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm' : 'bg-transparent'"
+       class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <div class="w-10 h-10 bg-gray-900 dark:bg-white rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-white dark:text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <span class="text-2xl font-bold text-gray-900 dark:text-white">FinFlow</span>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#features" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm font-medium transition-colors">Features</a>
+          <a href="#solutions" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm font-medium transition-colors">Solutions</a>
+          <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm font-medium transition-colors">Pricing</a>
+          <a href="#testimonials" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm font-medium transition-colors">Testimonials</a>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hidden md:flex items-center space-x-4">
+          <button @click="toggleDark()" class="p-2.5 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+          <button class="px-5 py-2.5 text-sm font-medium text-gray-900 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+            Sign In
+          </button>
+          <button class="px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+            Get Started
+          </button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="flex items-center space-x-2 md:hidden">
+          <button @click="toggleDark()" class="p-2 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+            <svg class="w-6 h-6 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-200"
+           x-transition:enter-start="opacity-0 scale-95"
+           x-transition:enter-end="opacity-100 scale-100"
+           x-transition:leave="transition ease-in duration-150"
+           x-transition:leave-start="opacity-100 scale-100"
+           x-transition:leave-end="opacity-0 scale-95"
+           class="md:hidden py-4 border-t border-gray-100"
+           x-cloak>
+        <div class="space-y-2">
+          <a href="#features" class="block px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">Features</a>
+          <a href="#solutions" class="block px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">Solutions</a>
+          <a href="#pricing" class="block px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">Pricing</a>
+          <a href="#testimonials" class="block px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">Testimonials</a>
+          <div class="pt-4 space-y-2">
+            <button class="w-full px-4 py-3 text-sm font-medium text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              Sign In
+            </button>
+            <button class="w-full px-4 py-3 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gray-50 -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Hero Content -->
+        <div class="space-y-8">
+          <div class="inline-flex items-center space-x-2 px-4 py-2 bg-white border border-gray-200 rounded-md">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+            <span class="text-sm font-medium text-gray-700">Now live in 120+ countries</span>
+          </div>
+
+          <h1 class="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+            Your money, finally
+            <span class="gradient-text">making sense</span>
+          </h1>
+
+          <p class="text-xl text-gray-600 leading-relaxed">
+            See where every dollar goes, get paid faster, and stop wondering if you can afford that thing. 2 million people already figured it out.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button class="px-8 py-4 bg-gray-900 text-white text-base font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+              Start Free Trial
+            </button>
+            <button class="px-8 py-4 bg-white text-gray-900 text-base font-semibold rounded-lg border-2 border-gray-900 hover:bg-gray-50 transition-colors">
+              Watch Demo
+            </button>
+          </div>
+
+          <!-- Trust indicators -->
+          <div class="flex flex-wrap items-center gap-6 pt-8">
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <span class="text-sm font-medium text-gray-700">4.9/5 from 12k reviews</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span class="text-sm font-medium text-gray-700">Bank-level security</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Image/Mockup -->
+        <div class="relative lg:pl-12">
+          <div class="relative">
+            <!-- Phone mockup placeholder -->
+            <div class="relative mx-auto w-80 h-[600px] bg-gray-900 rounded-3xl shadow-xl p-3 border-4 border-gray-900">
+              <div class="w-full h-full bg-white rounded-2xl overflow-hidden">
+                <!-- Mock app interface -->
+                <div class="h-full bg-gray-50 p-6 space-y-6">
+                  <div class="flex items-center justify-between">
+                    <div class="w-24 h-8 bg-gray-900 rounded-full"></div>
+                    <div class="w-8 h-8 bg-gray-900 rounded-full"></div>
+                  </div>
+                  <div class="bg-white rounded-lg p-6 shadow border border-gray-200">
+                    <div class="w-20 h-4 bg-gray-200 rounded mb-4"></div>
+                    <div class="w-40 h-10 bg-gray-900 rounded mb-2"></div>
+                    <div class="w-32 h-3 bg-gray-900 rounded"></div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white rounded-lg p-4 shadow">
+                      <div class="w-8 h-8 bg-gray-200 rounded-lg mb-3"></div>
+                      <div class="w-16 h-3 bg-gray-200 rounded"></div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow">
+                      <div class="w-8 h-8 bg-gray-200 rounded-lg mb-3"></div>
+                      <div class="w-16 h-3 bg-gray-200 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating cards -->
+            <div class="absolute -right-4 top-20 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500">Payment sent</p>
+                  <p class="text-sm font-bold text-gray-900">$1,250</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="absolute -left-4 bottom-32 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500">This month</p>
+                  <p class="text-sm font-bold text-gray-900">+32.4%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <p class="text-4xl lg:text-5xl font-bold text-white mb-2">2M+</p>
+          <p class="text-gray-400">Active Users</p>
+        </div>
+        <div>
+          <p class="text-4xl lg:text-5xl font-bold text-white mb-2">$5B+</p>
+          <p class="text-gray-400">Transactions</p>
+        </div>
+        <div>
+          <p class="text-4xl lg:text-5xl font-bold text-white mb-2">120+</p>
+          <p class="text-gray-400">Countries</p>
+        </div>
+        <div>
+          <p class="text-4xl lg:text-5xl font-bold text-white mb-2">99.9%</p>
+          <p class="text-gray-400">Uptime</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-16">
+        <span class="inline-block px-4 py-2 bg-gray-100 text-gray-900 text-sm font-semibold rounded-md mb-4">What you get</span>
+        <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Built for people who hate finance apps</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">No confusing graphs or spreadsheets. Just the stuff you actually need to know about your money.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Feature 1 -->
+        <div class="group p-8">
+          <svg class="w-7 h-7 text-gray-900 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Send Money in Seconds</h3>
+          <p class="text-gray-600 leading-relaxed">No waiting, no fees. Works like texting but for money. Your friend gets it before you put your phone down.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="group p-8">
+          <svg class="w-7 h-7 text-gray-900 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Know Where It Goes</h3>
+          <p class="text-gray-600 leading-relaxed">We'll show you exactly how much you spent on coffee this month. Yes, it's more than you think.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="group p-8">
+          <svg class="w-7 h-7 text-gray-900 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Actually Secure</h3>
+          <p class="text-gray-600 leading-relaxed">Same encryption banks use, minus the part where they get hacked every other year. We haven't been.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="group p-8">
+          <svg class="w-7 h-7 text-gray-900 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Burner Cards</h3>
+          <p class="text-gray-600 leading-relaxed">Make a new card for every sketchy website. Delete it when the free trial ends. Feel like a spy.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="group p-8">
+          <svg class="w-7 h-7 text-gray-900 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Sneaky Savings</h3>
+          <p class="text-gray-600 leading-relaxed">Rounds up your purchases and stashes the difference. You won't notice the pennies. You will notice the vacation fund.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="group p-8">
+          <svg class="w-7 h-7 text-gray-900 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Travel Without the Math</h3>
+          <p class="text-gray-600 leading-relaxed">Works in 150+ currencies at the actual exchange rate. Not the airport scam rate your bank charges.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-gray-900 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+      <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Try it free for 14 days</h2>
+      <p class="text-xl text-gray-300 mb-10">No credit card needed. Cancel whenever. See if it clicks with you.</p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="px-8 py-4 bg-white text-gray-900 text-base font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+          Start Free Trial
+        </button>
+        <button class="px-8 py-4 bg-transparent text-white text-base font-semibold rounded-lg border-2 border-white hover:bg-white/10 transition-colors">
+          Contact Sales
+        </button>
+      </div>
+
+      <p class="text-gray-400 text-sm mt-8">No credit card required • Cancel anytime • 14-day free trial</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+
+        <!-- Company -->
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-8 h-8 bg-gray-900 rounded flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-gray-900">FinFlow</span>
+          </div>
+          <p class="text-sm text-gray-600">Money stuff that actually makes sense.</p>
+        </div>
+
+        <!-- Product -->
+        <div>
+          <h4 class="text-sm font-semibold text-gray-900 mb-4">Product</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Features</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Pricing</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Security</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="text-sm font-semibold text-gray-900 mb-4">Company</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">About</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Blog</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Careers</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Press</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="text-sm font-semibold text-gray-900 mb-4">Legal</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacy</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Terms</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Cookie Policy</a></li>
+            <li><a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Licenses</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-sm text-gray-600">© 2024 FinFlow. All rights reserved.</p>
+        <div class="flex items-center space-x-6 mt-4 md:mt-0">
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

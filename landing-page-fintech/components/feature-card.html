@@ -1,0 +1,48 @@
+<!--
+  Component Name: Feature Card
+
+  Description: Modern feature card with gradient icon, hover effects, and clean typography
+
+  Usage Context: Feature sections, benefit showcases, service listings
+
+  Customization:
+  - Update gradient colors: from-blue-500 to-blue-600 (change blue to other colors)
+  - Replace SVG icon path with desired Heroicons icon
+  - Modify title in <h3>
+  - Update description in <p>
+  - Adjust icon size: w-14 h-14 for container, w-7 h-7 for icon
+
+  Accessibility:
+  - Semantic HTML structure
+  - Sufficient color contrast
+  - Hover states for interactivity
+  - Screen reader friendly text
+
+  Responsive Features:
+  - Scales well on all screen sizes
+  - Touch-friendly hover states on mobile
+  - Consistent padding and spacing
+
+  Examples:
+  - Product feature showcases
+  - Service benefit lists
+  - Platform capability highlights
+  - "Why choose us" sections
+-->
+
+<div class="group bg-white border border-gray-200 rounded-2xl p-8 hover:border-gray-300 hover:shadow-xl transition-all duration-300">
+  <!-- Icon with gradient background -->
+  <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+    </svg>
+  </div>
+
+  <!-- Title -->
+  <h3 class="text-xl font-bold text-gray-900 mb-3">Feature Title</h3>
+
+  <!-- Description -->
+  <p class="text-gray-600 leading-relaxed">
+    Feature description goes here. Explain the benefit and value this feature provides to users.
+  </p>
+</div>

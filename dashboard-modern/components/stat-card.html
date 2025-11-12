@@ -1,0 +1,50 @@
+<!--
+  Component Name: Stat Card
+
+  Description: Display key metrics with icon, value, and trend indicator
+
+  Usage Context: Dashboard KPIs, analytics summaries, metric overviews
+
+  Customization:
+  - Replace [LABEL] with metric name (e.g., "Total Revenue")
+  - Replace [VALUE] with actual metric value (e.g., "$45,231")
+  - Replace [ICON_SVG_PATH] with desired icon path from Heroicons
+  - Replace [ICON_BG_COLOR] with bg-blue-100, bg-green-100, etc.
+  - Replace [ICON_TEXT_COLOR] with text-blue-600, text-green-600, etc.
+  - Replace [TREND] with percentage change (e.g., "+12.5%")
+  - Replace [TREND_LABEL] with comparison text (e.g., "vs last month")
+  - Change trend colors: text-green-600 for positive, text-red-600 for negative
+  - Change arrow direction: M5 10l7-7 for up, M19 14l-7 7 for down
+
+  Accessibility:
+  - Semantic HTML structure
+  - Sufficient color contrast (WCAG AA)
+  - Trend indicators use both color and icons for accessibility
+
+  Examples:
+  - Revenue metrics on dashboard overview
+  - User growth statistics
+  - Order counts and conversion rates
+-->
+
+<div class="bg-white rounded-lg shadow p-6">
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex-1">
+      <p class="text-sm font-medium text-gray-600">[LABEL]</p>
+      <p class="text-3xl font-bold text-gray-900 mt-2">[VALUE]</p>
+    </div>
+    <div class="[ICON_BG_COLOR] rounded-full p-3">
+      <svg class="w-8 h-8 [ICON_TEXT_COLOR]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="[ICON_SVG_PATH]" />
+      </svg>
+    </div>
+  </div>
+  <div class="flex items-center text-sm">
+    <!-- Trend arrow (up for positive, down for negative) -->
+    <svg class="w-4 h-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+    <span class="text-green-600 font-medium">[TREND]</span>
+    <span class="text-gray-600 ml-2">[TREND_LABEL]</span>
+  </div>
+</div>
