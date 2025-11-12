@@ -1,17 +1,12 @@
-<div align="center">
-  <img src="logo.svg" alt=".context designs" width="600"/>
+# .context designs
 
-  <br/>
-  <br/>
+> A living demonstration of what happens when you combine Claude Code with the .context methodology
 
-  <p><strong>🚀 A living demonstration of what happens when you combine Claude Code with the .context methodology</strong></p>
-
-  <p>Modern, production-ready UI templates that showcase the future of AI-assisted development. Every line of code in this repository was created through conversation with <a href="https://claude.com/claude-code">Claude Code</a>, guided by structured documentation in the <a href="https://github.com/andrefigueira/.context/">.context</a> format.</p>
-</div>
+Modern, production-ready UI templates that showcase the future of AI-assisted development. Every line of code in this repository was created through conversation with [Claude Code](https://claude.com/claude-code), guided by structured documentation in the [.context](https://github.com/andrefigueira/.context/) format.
 
 ---
 
-## 🎯 The Revolution: Claude Code + .context
+## The Revolution: Claude Code + .context
 
 This repository represents a fundamental shift in how we build user interfaces. Not faster templates. Not better boilerplate. **A completely different way of working.**
 
@@ -30,16 +25,16 @@ Traditional approach:
 - Get production-ready, accessible, consistent code instantly
 - Documentation and code evolve together, never drift apart
 
-### 🔥 The Claude Code Advantage
+### The Claude Code Advantage
 
 [Claude Code](https://claude.com/claude-code) is not just another AI coding assistant. It's Anthropic's official CLI tool that fundamentally understands software development workflows.
 
 **Why Claude Code Changes Everything for UI Development:**
 
-#### 🎨 **Design System Mastery**
+#### Design System Mastery
 Claude Code reads your `.context/` files and internalizes your entire design language. Every component it generates matches your spacing, colors, typography, and interaction patterns. No more style drift. No more inconsistency. Just perfect adherence to your standards.
 
-#### ⚡ **From Thought to Production in Minutes**
+#### From Thought to Production in Minutes
 ```
 You: "Build a pricing page with three tiers, annual/monthly toggle,
      feature comparison table, and social proof section"
@@ -55,7 +50,7 @@ Claude Code: [Generates complete, production-ready component in 30 seconds]
 
 No copy-paste. No fighting with CSS. No accessibility afterthoughts. Just done.
 
-#### 🧠 **Learns Your Codebase**
+#### Learns Your Codebase
 Point Claude Code at any template in this repo and ask:
 - "Make a similar dashboard but for e-commerce analytics"
 - "Extract the card component pattern and create variations"
@@ -63,7 +58,7 @@ Point Claude Code at any template in this repo and ask:
 
 It understands context, maintains patterns, and extends your work intelligently.
 
-#### 🎓 **Teaches While It Builds**
+#### Teaches While It Builds
 Every generated component is a masterclass in modern web development:
 - Best practice HTML structure
 - Efficient Tailwind utility usage
@@ -75,7 +70,7 @@ Learn professional techniques by examining production-quality code.
 
 ---
 
-## 🏗️ The .context Methodology: Your AI Development Substrate
+## The .context Methodology: Your AI Development Substrate
 
 The [.context methodology](https://github.com/andrefigueira/.context/) is what transforms Claude Code from a code generator into your development partner.
 
@@ -160,7 +155,7 @@ When you ask Claude Code to "create a dashboard stat card", it:
 
 ---
 
-## 💎 These Templates: Proof of Concept
+## These Templates: Proof of Concept
 
 Every template in this repository started as a single sentence:
 
@@ -177,13 +172,13 @@ stats section, and CTA blocks"
 ```
 
 Within minutes, Claude Code generated:
-- ✅ Complete, production-ready HTML
-- ✅ Tailwind utilities following best practices
-- ✅ WCAG AA accessible markup
-- ✅ Responsive from 320px to 4K
-- ✅ Alpine.js interactivity
-- ✅ Comprehensive documentation
-- ✅ Extracted reusable components
+- Complete, production-ready HTML
+- Tailwind utilities following best practices
+- WCAG AA accessible markup
+- Responsive from 320px to 4K
+- Alpine.js interactivity
+- Comprehensive documentation
+- Extracted reusable components
 
 **Zero manual coding. Zero accessibility remediation. Zero responsive breakage. Just works.**
 
@@ -207,7 +202,7 @@ Within minutes, Claude Code generated:
 
 ---
 
-## 🖼️ Examples: From Prompt to Production
+## Examples: From Prompt to Production
 
 Here's what Claude Code generated from simple conversational prompts:
 
@@ -221,14 +216,14 @@ Here's what Claude Code generated from simple conversational prompts:
 </div>
 
 **What Claude Code delivered:**
-- ✅ Collapsible sidebar navigation with icons
-- ✅ Stats cards with trend indicators and icons
-- ✅ Interactive ApexCharts (area + donut charts)
-- ✅ Sortable data table with status badges
-- ✅ User dropdown menu
-- ✅ Fully responsive (mobile → desktop)
-- ✅ WCAG AA accessible
-- ✅ Complete Alpine.js interactivity
+- Collapsible sidebar navigation with icons
+- Stats cards with trend indicators and icons
+- Interactive ApexCharts (area + donut charts)
+- Sortable data table with status badges
+- User dropdown menu
+- Fully responsive (mobile → desktop)
+- WCAG AA accessible
+- Complete Alpine.js interactivity
 
 [View Source →](dashboard-modern/)
 
@@ -244,29 +239,80 @@ Here's what Claude Code generated from simple conversational prompts:
 </div>
 
 **What Claude Code delivered:**
-- ✅ Eye-catching hero with animated phone mockup
-- ✅ Sticky navigation with scroll effects
-- ✅ Stats section with impressive numbers
-- ✅ Feature grid with icons and descriptions
-- ✅ Multiple CTA sections
-- ✅ Smooth animations and transitions
-- ✅ Fully responsive design
-- ✅ Modern gradient aesthetics
+- Eye-catching hero with animated phone mockup
+- Sticky navigation with scroll effects
+- Stats section with impressive numbers
+- Feature grid with icons and descriptions
+- Multiple CTA sections
+- Smooth animations and transitions
+- Fully responsive design
+- Modern gradient aesthetics
 
 [View Source →](landing-page-fintech/)
 
 ---
 
-## 🎬 Getting Started with This Workflow
+## Getting Started with This Workflow
 
-### Prerequisites
-1. Install [Claude Code](https://docs.claude.com/en/docs/claude-code)
-2. Clone this repository: `git clone https://github.com/andrefigueira/.context-designs.git`
-3. Explore the `.context/` directory to understand the standards
+### The Critical First Step: Build Your Context
+
+**Before you write a single prompt, build your `.context/` foundation.**
+
+This is the secret that transforms Claude Code from a code generator into your development partner. AI agents thrive on context. When you invest time upfront documenting your standards, every subsequent prompt becomes more powerful, more direct, and more accurate.
+
+#### The Right Workflow:
+
+**Wrong Approach:**
+```
+You: "Build a dashboard with blue colors and cards"
+Claude Code: [Generates generic dashboard with random blues]
+You: "No, use our brand colors and add our spacing"
+Claude Code: [Adjusts but doesn't remember]
+You: "Make another component with same style"
+Claude Code: [Starts from scratch again]
+[Repeat forever with inconsistent results]
+```
+
+**Correct Approach:**
+```
+Step 1: Create .context/ documentation (one-time investment)
+  ├── Define your color palette
+  ├── Specify spacing scale
+  ├── Document component patterns
+  ├── Set accessibility requirements
+  └── Establish coding conventions
+
+Step 2: Now prompt Claude Code (becomes incredibly efficient)
+You: "Build a dashboard"
+Claude Code: [Generates perfect dashboard using YOUR exact standards]
+
+You: "Build a pricing page"
+Claude Code: [Uses same colors, spacing, patterns automatically]
+
+You: "Build a blog layout"
+Claude Code: [Consistent with everything else, zero guidance needed]
+```
+
+**The difference?** Claude Code reads your `.context/` files automatically and applies your standards to everything. No repetition. No drift. Perfect consistency.
+
+### Setting Up Your Context
+
+Start with these essential files in `.context/`:
+
+1. **`substrate.md`** - Project overview and philosophy
+2. **`styling/design-system.md`** - Colors, typography, spacing
+3. **`components/patterns.md`** - How components should be structured
+4. **`components/accessibility.md`** - Accessibility requirements
+5. **`architecture/patterns.md`** - Code organization standards
+
+You can use this repository as a template. Copy the `.context/` directory structure and customize it for your project.
+
+**Time investment:** 30-60 minutes to document your standards
+**Time saved:** Hours on every subsequent component, forever
 
 ### Your First AI-Generated Component
 
-Open Claude Code in this directory and try:
+Once your `.context/` is set up, prompts become incredibly simple and direct:
 
 ```
 "Create a team member card component with avatar, name, role, bio, and social links.
@@ -281,11 +327,18 @@ Watch Claude Code:
 - Generate mobile-responsive code
 - Create reusable, production-ready output
 
-That's it. From idea to implementation in seconds.
+**That's it. From idea to implementation in seconds.**
+
+The `.context/` groundwork you laid enables:
+- Shorter, more direct prompts
+- Consistent output across all components
+- Zero need to repeat styling preferences
+- Automatic adherence to your standards
+- AI that understands your codebase deeply
 
 ---
 
-## 📚 Available Templates
+## Available Templates
 
 Each template demonstrates the power of the Claude Code + .context workflow:
 
@@ -388,14 +441,14 @@ free-templates/
 
 ## Features
 
-- ✅ **Framework Agnostic**: Works with any JavaScript framework or none at all
-- ✅ **Mobile-First**: Responsive design from 320px to 4K displays
-- ✅ **Accessible**: WCAG 2.1 Level AA compliance minimum
-- ✅ **Modern Design**: Contemporary aesthetics following current best practices
-- ✅ **Production Ready**: Copy, customize, and deploy
-- ✅ **Well Documented**: Comprehensive README and inline documentation
-- ✅ **Component Based**: Extracted reusable components in each template
-- ✅ **No Build Required**: Uses CDN for instant preview (build process optional)
+- **Framework Agnostic**: Works with any JavaScript framework or none at all
+- **Mobile-First**: Responsive design from 320px to 4K displays
+- **Accessible**: WCAG 2.1 Level AA compliance minimum
+- **Modern Design**: Contemporary aesthetics following current best practices
+- **Production Ready**: Copy, customize, and deploy
+- **Well Documented**: Comprehensive README and inline documentation
+- **Component Based**: Extracted reusable components in each template
+- **No Build Required**: Uses CDN for instant preview (build process optional)
 
 ## Design Principles
 
@@ -550,6 +603,6 @@ This project follows the [.context methodology](https://github.com/andrefigueira
 
 ---
 
-**Made with ❤️ for the web development community**
+**Made for the web development community**
 
 Start building beautiful interfaces today. No dependencies. No complexity. Just pure Tailwind CSS.
