@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leads Report - Acme Inc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-50 antialiased">
+    <div x-data="{ sidebarOpen: false, userMenuOpen: false }" class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden lg:flex lg:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-white border-r border-gray-200">
+                <!-- Logo -->
+                <div class="flex items-center h-16 px-6 border-b border-gray-200">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        </svg>
+                        <span class="text-xl font-semibold text-gray-900">Acme Inc</span>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        Search
+                    </a>
+
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        Assigned to me
+                    </a>
+
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        Drafts
+                    </a>
+
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Schedule
+                    </a>
+
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        Customers
+                    </a>
+
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Leads Report
+                    </a>
+
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        Companies
+                    </a>
+                </nav>
+
+                <!-- Favorites Section -->
+                <div class="px-3 py-4 border-t border-gray-200">
+                    <h3 class="px-3 mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase">Favorites</h3>
+                    <div class="space-y-1">
+                        <a href="#" class="flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                                </svg>
+                                <span>Apple</span>
+                            </div>
+                            <span class="text-xs text-gray-400">COMPANY</span>
+                        </a>
+
+                        <a href="#" class="flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                                </svg>
+                                <span>Google</span>
+                            </div>
+                            <span class="text-xs text-gray-400">COMPANY</span>
+                        </a>
+
+                        <a href="#" class="flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                                </svg>
+                                <span>ClickUp</span>
+                            </div>
+                            <span class="text-xs text-gray-400">COMPANY</span>
+                        </a>
+
+                        <a href="#" class="flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Rico</span>
+                            </div>
+                            <span class="text-xs text-gray-400">INVESTOR</span>
+                        </a>
+
+                        <a href="#" class="flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Mehdi</span>
+                            </div>
+                            <span class="text-xs text-gray-400">DESIGNER</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Searches Section -->
+                <div class="px-3 py-4 border-t border-gray-200">
+                    <h3 class="px-3 mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase">Searches</h3>
+                    <div class="space-y-1">
+                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <span class="w-2 h-2 mr-3 bg-orange-500 rounded-full"></span>
+                            Customer Success
+                        </a>
+
+                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <span class="w-2 h-2 mr-3 bg-cyan-500 rounded-full"></span>
+                            Outsourcing
+                        </a>
+
+                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <span class="w-2 h-2 mr-3 bg-red-500 rounded-full"></span>
+                            Fundraising
+                        </a>
+
+                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
+                            <span class="w-2 h-2 mr-3 bg-blue-500 rounded-full"></span>
+                            Recruiting
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Upgrade Section -->
+                <div class="p-4 m-4 bg-gray-900 rounded-lg">
+                    <h3 class="text-sm font-semibold text-white">Get 50% Discount</h3>
+                    <p class="mt-1 text-xs text-gray-300">Upgrade your free-trial today</p>
+                    <button class="w-full px-4 py-2 mt-3 text-sm font-medium text-gray-900 bg-white rounded-lg hover:bg-gray-100">
+                        Upgrade now
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top Header -->
+            <header class="flex items-center justify-between h-16 px-6 bg-white border-b border-gray-200">
+                <div class="flex items-center space-x-4">
+                    <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                        </svg>
+                        <h1 class="text-lg font-semibold text-gray-900">Leads Report</h1>
+                        <span class="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded">13487 LEADS</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                    </button>
+
+                    <button class="p-2 text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center space-x-2">
+                            <span class="text-sm font-medium text-gray-700">Ask AI</span>
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto bg-gray-50">
+                <div class="px-6 py-6">
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2 lg:grid-cols-5">
+                        <!-- Pipeline Value -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-gray-500">Pipeline Value</h3>
+                            <div class="mt-2">
+                                <p class="text-3xl font-bold text-gray-900">$485,000</p>
+                            </div>
+                            <div class="flex items-center mt-2 text-sm">
+                                <span class="text-red-600">12.5% ↓</span>
+                                <span class="ml-2 text-gray-500">vs Last Months</span>
+                            </div>
+                        </div>
+
+                        <!-- Lead-to-Deal Rate -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-gray-500">Lead-to-Deal Rate</h3>
+                            <div class="mt-2">
+                                <p class="text-3xl font-bold text-gray-900">18.5%</p>
+                            </div>
+                            <div class="flex items-center mt-2 text-sm">
+                                <span class="text-red-600">12.5% ↓</span>
+                                <span class="ml-2 text-gray-500">vs Last Months</span>
+                            </div>
+                        </div>
+
+                        <!-- Contacted Leads -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-gray-500">Contacted Leads</h3>
+                            <div class="mt-2">
+                                <p class="text-3xl font-bold text-gray-900">92</p>
+                            </div>
+                            <div class="flex items-center mt-2 text-sm">
+                                <span class="text-green-600">+25% ↑</span>
+                                <span class="ml-2 text-gray-500">vs Last Months</span>
+                            </div>
+                        </div>
+
+                        <!-- Qualified Leads -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-gray-500">Qualified Leads</h3>
+                            <div class="mt-2">
+                                <p class="text-3xl font-bold text-gray-900">38</p>
+                            </div>
+                            <div class="flex items-center mt-2 text-sm">
+                                <span class="text-green-600">+25% ↑</span>
+                                <span class="ml-2 text-gray-500">vs Last Months</span>
+                            </div>
+                        </div>
+
+                        <!-- Hot Leads -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-gray-500">Hot Leads</h3>
+                            <div class="mt-2">
+                                <p class="text-3xl font-bold text-gray-900">12</p>
+                            </div>
+                            <div class="flex items-center mt-2 text-sm">
+                                <span class="text-green-600">+25% ↑</span>
+                                <span class="ml-2 text-gray-500">vs Last Months</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sales Revenue and Segmentation Row -->
+                    <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
+                        <!-- Sales Revenue Chart -->
+                        <div class="p-6 bg-white rounded-lg shadow lg:col-span-2">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-500">Sales Revenue</h3>
+                                    <p class="mt-2 text-3xl font-bold text-gray-900">$1,631,241</p>
+                                    <div class="flex items-center mt-1 text-sm">
+                                        <span class="text-red-600">12.5% ↓</span>
+                                        <span class="ml-2 text-gray-500">vs yesterday</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2 text-sm">
+                                    <div class="px-3 py-2 text-center border border-gray-200 rounded-lg">
+                                        <p class="text-gray-500">3m growth</p>
+                                        <p class="font-semibold text-green-600">+25% ↑</p>
+                                    </div>
+                                    <div class="px-3 py-2 text-center border border-gray-200 rounded-lg">
+                                        <p class="text-gray-500">6m growth</p>
+                                        <p class="font-semibold text-green-600">+25% ↑</p>
+                                    </div>
+                                    <div class="px-3 py-2 text-center border border-gray-200 rounded-lg">
+                                        <p class="text-gray-500">1y growth</p>
+                                        <p class="font-semibold text-red-600">12.5% ↓</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="salesChart"></div>
+                        </div>
+
+                        <!-- Segmentation -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-gray-500">Segmentation</h3>
+                            <div class="mt-4">
+                                <p class="text-3xl font-bold text-gray-900">2,388</p>
+                                <p class="text-sm text-gray-500">total customers</p>
+                            </div>
+
+                            <div class="mt-6 space-y-3">
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 mr-2 bg-cyan-500 rounded-full"></span>
+                                            <span class="text-sm text-gray-700">Mid Market</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-3 bg-cyan-500 rounded-full" style="width: 45%"></div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 mr-2 bg-orange-500 rounded-full"></span>
+                                            <span class="text-sm text-gray-700">Small Business</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-3 bg-orange-500 rounded-full" style="width: 52%"></div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 mr-2 bg-yellow-400 rounded-full"></span>
+                                            <span class="text-sm text-gray-700">Individual</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-3 bg-yellow-400 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Channels -->
+                            <div class="pt-6 mt-6 border-t border-gray-200">
+                                <h4 class="text-sm font-medium text-gray-500">Channels</h4>
+                                <div class="mt-4 space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                            </svg>
+                                            <span class="text-sm text-gray-700">Facebook</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm font-semibold text-gray-900">2341</span>
+                                            <span class="text-sm text-green-600">+25% ↑</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                            </svg>
+                                            <span class="text-sm text-gray-700">Twitter</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm font-semibold text-gray-900">1231</span>
+                                            <span class="text-sm text-red-600">-25% ↓</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                            </svg>
+                                            <span class="text-sm text-gray-700">Google</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm font-semibold text-gray-900">1123</span>
+                                            <span class="text-sm text-red-600">-25% ↓</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                            </svg>
+                                            <span class="text-sm text-gray-700">Instagram</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm font-semibold text-gray-900">125</span>
+                                            <span class="text-sm text-green-600">+25% ↑</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="inline-block mt-4 text-sm font-medium text-blue-600 hover:text-blue-700">
+                                    Full reports
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leads by Status and Web Visits Row -->
+                    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                        <!-- Leads by Status -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <h3 class="mb-4 text-sm font-medium text-gray-500">Leads by Status</h3>
+                            <div class="mb-4">
+                                <p class="text-3xl font-bold text-gray-900">213</p>
+                                <p class="text-sm text-gray-500">in pipeline</p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-sm font-medium text-gray-700">New Leads</span>
+                                            <span class="text-sm font-semibold text-gray-900">134</span>
+                                        </div>
+                                        <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-cyan-500 rounded-full" style="width: 63%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-sm font-medium text-gray-700">Contacted</span>
+                                            <span class="text-sm font-semibold text-gray-900">121</span>
+                                        </div>
+                                        <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-orange-500 rounded-full" style="width: 57%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-sm font-medium text-gray-700">Qualified</span>
+                                            <span class="text-sm font-semibold text-gray-900">133</span>
+                                        </div>
+                                        <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-yellow-400 rounded-full" style="width: 62%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-sm font-medium text-gray-700">Inactive</span>
+                                            <span class="text-sm font-semibold text-gray-900">153</span>
+                                        </div>
+                                        <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-cyan-400 rounded-full" style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-sm font-medium text-gray-700">Nego</span>
+                                            <span class="text-sm font-semibold text-gray-900">123</span>
+                                        </div>
+                                        <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-purple-500 rounded-full" style="width: 58%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Web Visits -->
+                        <div class="p-6 bg-white rounded-lg shadow">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-500">Web Visits</h3>
+                                    <p class="mt-2 text-3xl font-bold text-gray-900">701.34m</p>
+                                    <div class="flex items-center mt-1 text-sm">
+                                        <span class="text-red-600">12.5% ↓</span>
+                                        <span class="ml-2 text-gray-500">vs last month</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2 text-sm">
+                                    <div class="px-3 py-2 text-center border border-gray-200 rounded-lg">
+                                        <p class="text-gray-500">3m growth</p>
+                                        <p class="font-semibold text-green-600">+25% ↑</p>
+                                    </div>
+                                    <div class="px-3 py-2 text-center border border-gray-200 rounded-lg">
+                                        <p class="text-gray-500">6m growth</p>
+                                        <p class="font-semibold text-green-600">+25% ↑</p>
+                                    </div>
+                                    <div class="px-3 py-2 text-center border border-gray-200 rounded-lg">
+                                        <p class="text-gray-500">1y growth</p>
+                                        <p class="font-semibold text-red-600">12.5% ↓</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="webVisitsChart"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Sales Revenue Chart
+        var salesOptions = {
+            series: [{
+                name: 'Revenue',
+                data: [0, 0, 0, 0, 1630000, 0, 0, 0, 0, 0, 0, 0]
+            }],
+            chart: {
+                type: 'bar',
+                height: 250,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 8,
+                    columnWidth: '60%',
+                    distributed: true,
+                }
+            },
+            colors: ['#e5e7eb', '#e5e7eb', '#e5e7eb', '#e5e7eb', '#fb923c', '#e5e7eb', '#e5e7eb', '#e5e7eb', '#e5e7eb', '#e5e7eb', '#e5e7eb', '#e5e7eb'],
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                }
+            },
+            yaxis: {
+                show: false
+            },
+            grid: {
+                show: false
+            }
+        };
+
+        var salesChart = new ApexCharts(document.querySelector("#salesChart"), salesOptions);
+        salesChart.render();
+
+        // Web Visits Chart
+        var webVisitsOptions = {
+            series: [{
+                name: 'Visits',
+                data: [650, 680, 620, 590, 570, 550, 520, 480, 450, 420, 410, 400, 390, 380, 420, 460, 500, 530, 580, 620, 660, 700, 740, 780, 810, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 20, 0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500, 520, 540, 560, 580, 600, 620, 640, 660, 680, 700, 720, 740, 760, 780, 800, 820, 840, 860, 880, 900, 920, 940, 960, 980, 1000, 980, 960, 940, 920, 900, 880, 860, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400]
+            }],
+            chart: {
+                type: 'line',
+                height: 250,
+                toolbar: {
+                    show: false
+                },
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+                colors: ['#fb923c']
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                }
+            },
+            yaxis: {
+                show: false
+            },
+            grid: {
+                show: false
+            },
+            tooltip: {
+                enabled: true
+            }
+        };
+
+        var webVisitsChart = new ApexCharts(document.querySelector("#webVisitsChart"), webVisitsOptions);
+        webVisitsChart.render();
+    </script>
+</body>
+</html>
