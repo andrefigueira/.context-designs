@@ -6,6 +6,23 @@ Modern, production-ready UI templates that showcase the future of AI-assisted de
 
 ---
 
+## 📚 Documentation & Guides
+
+**New to this project? Start here:**
+
+- **[⚡ Quick Start Guide](QUICKSTART.md)** - Get up and running in 5 minutes
+- **[💻 Claude Code Guide](CLAUDE-CODE-GUIDE.md)** - Master Claude Code with this project
+- **[🖥️ Claude Desktop Guide](CLAUDE-DESKTOP-GUIDE.md)** - Use Claude Desktop for planning and reviews
+- **[📄 Template Guide](TEMPLATE-GUIDE.md)** - Create, modify, and maintain templates
+
+**Quick navigation:**
+- 🚀 [Installation & Setup](QUICKSTART.md#démarrage-en-3-étapes)
+- 🎨 [Use existing templates](QUICKSTART.md#utiliser-un-template-existant)
+- ✨ [Create with Claude Code](CLAUDE-CODE-GUIDE.md#utilisation-basique)
+- 🛠️ [Build new templates](TEMPLATE-GUIDE.md#créer-un-nouveau-template)
+
+---
+
 ## The Revolution: Claude Code + .context
 
 This repository shows how Claude Code and .context documentation work together to change UI development. You define your design system once, then generate components that follow your exact standards every time.
